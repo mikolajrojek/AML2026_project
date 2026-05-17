@@ -15,7 +15,7 @@ transforms = transforms.Compose([transforms.ToTensor(), transforms.Resize(size=[
 # this resize is necessary because we need same shape tensors to put into a neural network. math.
 
 dataset = datasets.ImageFolder(root = path, transform=transforms) #ImageFolder has no train or download methods.
-loader = DataLoader(dataset, batch_size=16, shuffle=True) #train-test split done later cuz im lazy. bs=16 is temporary.
+loader = DataLoader(dataset, batch_size=16, shuffle=True) #train-test split. bs=16 is temporary.
 images, labels = next(iter(loader))
 
 img_tensor, label = dataset[0]
