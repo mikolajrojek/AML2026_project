@@ -21,8 +21,8 @@ def data_trafic_signs(train_bs, test_bs, show_pictures = False):
     test_dataset = [test_dataset[i] for i in range(len(test_dataset)) if test_dataset[i][1] != 20]
     dataset.class_to_idx.pop('other')
 
-    train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=16)
+    train_loader = DataLoader(train_dataset, batch_size=train_bs, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=test_bs)
    
 
     if show_pictures:
