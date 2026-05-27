@@ -64,7 +64,7 @@ def hyp_optimisation(lr_tab, bs_tab):
 
     for lr in lr_tab:
         for bs in bs_tab:
-            train_loader = DataLoader(test_dataset, batch_size=bs, shuffle=True)
+            train_loader = DataLoader(train_dataset, batch_size=bs, shuffle=True)
             torch.manual_seed(42)
             model = BetterCNN().to(device)
 
