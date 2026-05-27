@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
 
 
-def data_trafic_signs(train_bs, test_bs, show_pictures = False):
+def data_trafic_signs(train_bs=16, test_bs=16, show_pictures = False):
     path = kagglehub.dataset_download("chriskjm/polish-traffic-signs-dataset")
     path = path + r'/classification'
     print("Path to dataset files:", path)
@@ -21,37 +21,38 @@ def data_trafic_signs(train_bs, test_bs, show_pictures = False):
     test_dataset = [test_dataset[i] for i in range(len(test_dataset)) if test_dataset[i][1] != 20]
     dataset.class_to_idx.pop('other')
 
-    train_loader = DataLoader(train_dataset, batch_size=train_bs, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=test_bs)
+    # train_loader = DataLoader(train_dataset, batch_size=train_bs, shuffle=True)
+    # test_loader = DataLoader(test_dataset, batch_size=test_bs)
    
 
-    if show_pictures:
-        images, labels = next(iter(train_loader))
+    # if show_pictures:
+    #     images, labels = next(iter(train_loader))
 
-        img_tensor, label = dataset[0]
+    #     img_tensor, label = dataset[0]
 
-        print("Tensor shape:", img_tensor.shape) 
-        print("Dataset size:", len(train_dataset)+len(test_dataset))
-        print("Train dataset size: ", len(train_dataset))
-        print("Test dataset size: ", len(test_dataset)) 
-        print("Batch size:", train_loader.batch_size)
-        print("Number of batches per epoch:", len(train_loader))
-        print("Example label:", dataset[0][1])
-        print("Actual label:", dataset.classes[dataset[0][1]])  #it isn't found in the pytorch docs but ImageFolder automatically assignes
-        print("Example label:", dataset[80][1])                 #different folders to integers instead of their actual names as labels.
-        print("Actual label:", dataset.classes[dataset[80][1]])
-        print("Class mapping", dataset.class_to_idx)
-        fig, ax = plt.subplots(4, 4, figsize=(7,7))
-        ax = ax.flatten()
-        for i in range(16):
-            img = images[i]
-            img = img*0.5 + 0.5
-            img = img.permute(1,2,0)
-            img = img.numpy()
-            ax[i].imshow(img)
-            ax[i].set_title(dataset.classes[labels[i]])
-            ax[i].axis('off')
-        plt.show()
-        plt.tight_layout()
+    #     print("Tensor shape:", img_tensor.shape) 
+    #     print("Dataset size:", len(train_dataset)+len(test_dataset))
+    #     print("Train dataset size: ", len(train_dataset))
+    #     print("Test dataset size: ", len(test_dataset)) 
+    #     print("Batch size:", train_loader.batch_size)
+    #     print("Number of batches per epoch:", len(train_loader))
+    #     print("Example label:", dataset[0][1])
+    #     print("Actual label:", dataset.classes[dataset[0][1]])  #it isn't found in the pytorch docs but ImageFolder automatically assignes
+    #     print("Example label:", dataset[80][1])                 #different folders to integers instead of their actual names as labels.
+    #     print("Actual label:", dataset.classes[dataset[80][1]])
+    #     print("Class mapping", dataset.class_to_idx)
+    #     fig, ax = plt.subplots(4, 4, figsize=(7,7))
+    #     ax = ax.flatten()
+    #     for i in range(16):
+    #         img = images[i]
+    #         img = img*0.5 + 0.5
+    #         img = img.permute(1,2,0)
+    #         img = img.numpy()
+    #         ax[i].imshow(img)
+    #         ax[i].set_title(dataset.classes[labels[i]])
+    #         ax[i].axis('off')
+    #     plt.show()
+    #     plt.tight_layout()
 
-    return train_loader, test_loader
+    # return train_loader, test_loader
+    return train_dataset, test_dataset
