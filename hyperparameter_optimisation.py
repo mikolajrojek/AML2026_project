@@ -11,7 +11,7 @@ sys.path.append(str(Path(__file__).parent / "src" / "training"))
 
 from data import data_trafic_signs
 from training import train, validate
-from model import BetterCNN
+from model import ModelCNN_ReLU
 
 
 def draw_heatmap(data_lr, data_bs, data_fl, data_acc):
@@ -66,7 +66,7 @@ def hyp_optimisation(lr_tab, bs_tab):
         for bs in bs_tab:
             train_loader = DataLoader(train_dataset, batch_size=bs, shuffle=True)
             torch.manual_seed(42)
-            model = BetterCNN().to(device)
+            model = ModelCNN_ReLU().to(device)
 
             final_loss = train(model, lr, train_loader, bs = bs, epochs=10)
             accuracy = validate(model, test_loader)

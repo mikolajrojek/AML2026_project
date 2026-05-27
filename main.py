@@ -8,9 +8,10 @@ sys.path.append(str(Path(__file__).parent / "src" / "model"))
 sys.path.append(str(Path(__file__).parent / "src" / "training"))
 
 from data import data_trafic_signs
-from model import SimpleCNN, BetterCNN
+from model import ModelCNN_ReLU
 from training import train,validate
 from hyperparameter_optimisation import hyp_optimisation
+from model_comparison import comparison
 
 LEARNING_RATE = 0.001
 BATCH_SIZE = 32
@@ -24,11 +25,13 @@ def main():
     test_loader = DataLoader(test_dataset, batch_size=16)
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 
-    model = BetterCNN().to(device)
-    
-    train(model=model, lr = LEARNING_RATE, train_loader=train_loader, epochs = EPOCHS)
 
-    validate(model, test_loader)
+    comparison(train_loader, test_loader)
+    # model = ModelCNN_ReLU().to(device)
+    
+    # train(model=model, lr = LEARNING_RATE,bs=BATCH_SIZE, train_loader=train_loader, epochs = EPOCHS)
+
+    # validate(model, test_loader)
 
 
 main()
