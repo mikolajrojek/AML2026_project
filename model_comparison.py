@@ -34,7 +34,7 @@ def comparison(train_loader, test_loader):
     i = 1
     print("Model 1: ReLU, 2: SiLu, 3: LeakyReLU, 4: GELU, 5: ELU")
     for acc,fl in zip(acc_tab,fl_tab):
-        print(f"Model {i}: accuracy {acc}, final loss: {fl}")
+        print(f"Model {i}: accuracy {acc:.2f}%, final loss: {fl:.2f}")
         i += 1
 
 

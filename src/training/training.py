@@ -108,38 +108,32 @@ def validate(model, test_loader):
     
 
 
-    # import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
 
 
-    # # Switch model to evaluation mode
-    # model.eval()
+    # Switch model to evaluation mode
+    model.eval()
 
 
-    # # Pick a batch from test set
-    # data_iter = iter(test_loader)
-    # images, labels = next(data_iter)
-    # images, labels = images.to(device), labels.to(device)
+    # Pick a batch from test set
+    data_iter = iter(test_loader)
+    images, labels = next(data_iter)
+    images, labels = images.to(device), labels.to(device)
 
 
-    # # Forward pass
-    # outputs = model(images)
-    # _, preds = torch.max(outputs, 1)
+    # Forward pass
+    outputs = model(images)
+    _, preds = torch.max(outputs, 1)
 
 
-    # # Display first 8 images with predictions
-    # fig, axes = plt.subplots(2, 4, figsize=(12,6))
-    # for i, ax in enumerate(axes.flat):
-    #     img = images[i].cpu().squeeze()
-    #     ax.imshow(img, cmap='gray')
-    #     ax.set_title(f"Pred: {preds[i].item()} / True: {labels[i].item()}")
-    #     ax.axis('off')
-    # plt.show()
-
-
-    # # Example: Inference on single image
-    # single_img = images[0].unsqueeze(0)  # add batch dimension
-    # output_single = model(single_img)
-    # pred_single = torch.argmax(output_single, dim=1)
-    # print(f"Single image prediction: {pred_single.item()}, True label: {labels[0].item()}")
+    # Display first 8 images with predictions
+    fig, axes = plt.subplots(2, 4, figsize=(12,6))
+    for i, ax in enumerate(axes.flat):
+        img = images[i].cpu() # shape (C, H, W)
+        img = img.permute(1, 2, 0) # shape (H, W, C)
+        ax.imshow(img) # works for RGB
+        ax.set_title(f"Pred: {preds[i].item()} / True: {labels[i].item()}")
+        ax.axis('off')
+    plt.show()
 
     return 100 * correct / total
